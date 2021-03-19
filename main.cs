@@ -28,7 +28,7 @@ public class main
 		Dictionary<int,int> tabOfFreqMutual = new Dictionary<int, int>();
 		int indeks = nodes.IndexOf(node);
 		//PAKAI INI AJA SOALNYA INDAH UNTUK DIBACA
-		
+
 		foreach( int a in adjacentList[indeks]){
 			// Console.WriteLine("Kapasitasnya adalah {0}", adjacentList[a].Capacity);
 			foreach(int b in adjacentList[a]){
