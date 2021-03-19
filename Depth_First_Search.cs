@@ -30,7 +30,7 @@ namespace Depth_First_Search
         // This procedure initiate all components needed for DFS, then call DepthFirstSearchHelp
         static List<string> DepthFirstSearch(List<int>[] adjacentList, List<string> nodes, string user)
         {
-            int head = nodes.indexof(user);
+            int head = nodes.IndexOf(user);
             List<int> output = new List<int>();
 
             if (head == -1)
@@ -49,34 +49,13 @@ namespace Depth_First_Search
             return out;
         }
 
-        // Function to determine whether "a" has connection (edge) to "b" or not
-        static bool isEdge(List<char>[] graph, char a, char b)
-        {
-            // Returns true if b is an edge of a
-            foreach (char c in graph[getIdx(graph, a)])
-            {
-                if (c == b)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         // Function to return path of the starting node (user) to "end"
         // Starting node based on output's head (head[0])
-        static List<char> getPathDFS(List<char>[] graph, List<char> output, char end)
+        static List<char> getPathDFS(List<int>[] adjacentList, List<string> output, string end)
         {
-            int endIdx = -1;
-            for (int i = 0; i < output.Count; i++)
-            {
-                if (output[i] == end)
-                {
-                    endIdx = i;
-                    break;
-                }
-            }
-            List<char> path = new List<char>(output.Count);
+            int endIdx = output.IndexOf(end);
+
+            List<string> path = new List<string>(output.Count);
             if (endIdx == -1)
             {
                 Console.Write("Node can't be reached");
@@ -84,11 +63,20 @@ namespace Depth_First_Search
             }
             // int endIdx = output.FindIndex(i => output[i] == end);
 
+            1 3 5 4
+
+            1 4 
+            3 5
+            1 3 
+
+            1 4
+
+
             path.Add(output[endIdx]);
-            char curr = end;
+            string curr = end;
             for (int j = endIdx - 1; j >= 0; j--)
             {
-                if (isEdge(graph, output[j], curr))
+                if (adjacentList[nodes.IndexOf(curr)].IndexOf(j) != -1 )
                 {
                     curr = output[j];
                     path.Add(output[j]);
