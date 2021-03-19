@@ -4,6 +4,7 @@ using System.Linq;
 public class main
 {
 	static void MutualFriends(List<int>[] adjacentList, List<string> nodes, string node1, string node2){
+		//TETEP PAKE INI SOALNYA NYAMAN UNTUK DIBACA
 		foreach( int a in adjacentList[nodes.IndexOf(node1)]){
 			foreach(int b in adjacentList[nodes.IndexOf(node2)]){
 				if (a == b){
@@ -13,8 +14,10 @@ public class main
 		}
 
 		//INI ERROR JUGA NJIR
-		// for (int i =0; i < adjacentList[nodes.IndexOf(node1)].Capacity; i++){
-		// 	for (int j =0; j< adjacentList[nodes.IndexOf(node2)].Capacity; j++){
+		//TERNYATA HARUS PAKE COUNT BUKAN CAPACITY, CAPACITY ITU MAKSNYA DAN PASTI DBIKIN PANGKAT 2, PANTES LOLOS KALAU ISINYA 4
+
+		// for (int i =0; i < adjacentList[nodes.IndexOf(node1)].Count; i++){
+		// 	for (int j =0; j< adjacentList[nodes.IndexOf(node2)].Count; j++){
 		// 		if(adjacentList[nodes.IndexOf(node1)][i] == adjacentList[nodes.IndexOf(node2)][j]){
 		// 			Console.WriteLine(nodes[adjacentList[nodes.IndexOf(node1)][i]]);
 		// 		}
@@ -24,6 +27,8 @@ public class main
 	static void FriendRecommendation(List<int>[] adjacentList, List<string> nodes, string node ){
 		Dictionary<int,int> tabOfFreqMutual = new Dictionary<int, int>();
 		int indeks = nodes.IndexOf(node);
+		//PAKAI INI AJA SOALNYA INDAH UNTUK DIBACA
+		
 		foreach( int a in adjacentList[indeks]){
 			// Console.WriteLine("Kapasitasnya adalah {0}", adjacentList[a].Capacity);
 			foreach(int b in adjacentList[a]){
@@ -45,11 +50,11 @@ public class main
 		
 		//ANJIR OGEB BANGET MASAK PAKE FORLOOP BIASA MALAH BIKIN ERROR
 
-		// for (int i =0; i < adjacentList[indeks].Capacity; i++){
+		// for (int i =0; i < adjacentList[indeks].Count; i++){
 		// 	Console.WriteLine("Masuk {0}", i);
 		// 	int dummy = adjacentList[indeks][i];
-		// 	Console.WriteLine("Kapasitasnya adalah {0}", adjacentList[dummy].Capacity);
-		// 	for(int j =0; j < adjacentList[dummy].Capacity; j++){
+		// 	Console.WriteLine("Kapasitasnya adalah {0}", adjacentList[dummy].Count);
+		// 	for(int j =0; j < adjacentList[dummy].Count; j++){
 				
 		// 		if (adjacentList[dummy][j] != indeks && adjacentList[indeks].IndexOf(adjacentList[dummy][j]) == -1){
 		// 			if (tabOfFreqMutual.ContainsKey(adjacentList[dummy][j])){
@@ -115,12 +120,12 @@ public class main
 			}
 			
 		}
-		List<int>[] adjacentList = new List<int>[nodes.Capacity]; //sebenernya array of list string bagus soalnya c# punya banyak method buat nanganin pencarian string tapi lebih nyaman pake int
+		List<int>[] adjacentList = new List<int>[nodes.Count]; //sebenernya array of list string bagus soalnya c# punya banyak method buat nanganin pencarian string tapi lebih nyaman pake int
 		//kalau pake int ya konsekuensinya harus make referensi indexof dari nodes
 		//misal pengen akses adjacentlist dari node "A", nah cara aksesnya yaitu adjacentlist[nodes.IndexOf("A")]
 		//nanti isinya indeks dari nodes mana aja yang bertetanggaan sama A
 
-		for(int i = 0; i < nodes.Capacity; i++){
+		for(int i = 0; i < nodes.Count; i++){
 			adjacentList[i] = new List<int>();
 		}
 		foreach (string line in edge)
@@ -136,11 +141,11 @@ public class main
 			}
 			
 		}
-		for (int i =0; i < nodes.Capacity; i++){
+		for (int i =0; i < nodes.Count; i++){
 			adjacentList[i].Sort((x,y) => nodes[x].CompareTo(nodes[y]));
 			//sort boy
 		}
-		for (int i = 0; i < nodes.Capacity; i++){
+		for (int i = 0; i < nodes.Count; i++){
 			Console.WriteLine("Adjacent node dari node {0} adalah", nodes[i]);
 			foreach(int b in adjacentList[i]){
 				Console.Write(" {0}",nodes[b]);
