@@ -3,6 +3,63 @@ using System.Collections.Generic;
 using System.Linq;
 public class main
 {
+	static List<string> BreadthFirstSearch(List<int>[] adjacentList, List<string> nodes, string start, string end)
+	{
+		List<int> output = new List<int>();
+		List<int> temp = new List<int>();
+		temp = adjacentList[nodes.IndexOf(start)];
+		Boolean found = false;
+		output.Add(nodes.IndexOf(start));
+		int[] predator = new int[nodes.Count];
+		for (int i = 0 ; i < nodes.Count; i++){
+			predator[i] = -1;
+		}
+		bool[] visited = new bool[nodes.Count];
+		for  (int i = 0; i < nodes.Count; i++){
+			visited[i] = false;
+		}  
+		visited[nodes.IndexOf(start)] = true;
+		while(output.Count != 0 && !found){
+			Console.WriteLine("tes");
+			int i = output[0];
+			output.RemoveAt(0);
+			temp = adjacentList[i];
+			foreach (int val in temp){
+				if (!visited[val]){
+					if (val == nodes.IndexOf(end)){
+						found = true;
+					}
+					visited[val] = true;
+					predator[val] = i;
+					output.Add(val);
+				}
+			}
+		}
+
+		for(int i = 0 ; i < nodes.Count; i++){
+			if (predator[i] != -1){
+				Console.WriteLine("{0} -> {1}", nodes[predator[i]], nodes[i]);
+			}
+		}
+		Console.WriteLine("Ini debugging");
+
+		List<string> hasil = new List<string>();
+		if(!output.Contains(nodes.IndexOf(end))){
+			Console.WriteLine("Failed to locate user");
+			return hasil;
+		}
+		else{
+			int i = nodes.IndexOf(end);
+			hasil.Add(end);
+			while(predator[i]!=nodes.IndexOf(start)){
+				hasil.Add(nodes[predator[i]]);
+				i = predator[i];
+			}
+			hasil.Add(start);
+			hasil.Reverse();
+		}
+		return hasil;
+	}
 	static void DepthFirstSearchHelp(List<int>[] adjacentList, int idx, ref List<int> output)
         {
             List<int> temp = adjacentList[idx];
@@ -225,9 +282,12 @@ public class main
 		tes = DepthFirstSearch(adjacentList,nodes,"A");
 
 		List<string> testing = new List<string>();
-		testing = getPathDFS(adjacentList,tes, "C", nodes);
+		testing = getPathDFS(adjacentList,tes, "H", nodes);
 
-
+		tes = BreadthFirstSearch(adjacentList, nodes, "A", "H");
+		foreach( string s in tes){
+			Console.WriteLine(s);
+		}
 
 		// foreach(string s in tes){
 		// 	Console.WriteLine(s);
