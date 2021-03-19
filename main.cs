@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Depth_First_Search;
 public class main
 {
 	static void MutualFriends(List<int>[] adjacentList, List<string> nodes, string node1, string node2){
@@ -154,7 +155,12 @@ public class main
 			//ini buat ngecek aja bener apa gak.
 		}
 
-		
+		List<string> tes = new List<string>();
+		tes = Depth_First_Search(adjacentList,nodes,"A");
+
+		foreach(string s in tes){
+			Console.WriteLine(s);
+		}
 		
 		FriendRecommendation(adjacentList,nodes,"E");
 
