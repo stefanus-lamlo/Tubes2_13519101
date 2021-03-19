@@ -95,9 +95,9 @@ public class main
 		string[] edge;
 		if (args.Length == 0){
 			string namaFile = Console.ReadLine();
-			edge = System.IO.File.ReadAllLines(namaFile);
+			edge = System.IO.File.ReadAllLines(namaFile); //ini buat nama file yang diinput di dalem program
 		}else{
-			edge = System.IO.File.ReadAllLines(args[0]);
+			edge = System.IO.File.ReadAllLines(args[0]); //ini khusus buat aku soalnya males nulis hehe
 		}
 		List<string> nodes = new List<string>();
 		foreach (string line in edge)
@@ -106,10 +106,10 @@ public class main
 				int space = line.IndexOf(" ");
 				string elm1 = line.Substring(0,space);
 				string elm2 = line.Substring(space+1);
-				if (nodes.IndexOf(elm1) == -1){
+				if (nodes.IndexOf(elm1) == -1){ //kalau belum ada di daftar nodes, tambahin
 					nodes.Add(elm1);
 				}
-				if (nodes.IndexOf(elm2) == -1){
+				if (nodes.IndexOf(elm2) == -1){ //kalau belum ada tambahin juga
 					nodes.Add(elm2);
 				}
 			}
@@ -117,6 +117,8 @@ public class main
 		}
 		List<int>[] adjacentList = new List<int>[nodes.Capacity]; //sebenernya array of list string bagus soalnya c# punya banyak method buat nanganin pencarian string tapi lebih nyaman pake int
 		//kalau pake int ya konsekuensinya harus make referensi indexof dari nodes
+		//misal pengen akses adjacentlist dari node "A", nah cara aksesnya yaitu adjacentlist[nodes.IndexOf("A")]
+
 		for(int i = 0; i < nodes.Capacity; i++){
 			adjacentList[i] = new List<int>();
 		}
@@ -126,10 +128,16 @@ public class main
 				int space = line.IndexOf(" ");
 				string elm1 = line.Substring(0,space);
 				string elm2 = line.Substring(space+1);
-				adjacentList[nodes.IndexOf(elm1)].Add(nodes.IndexOf(elm2));
+				adjacentList[nodes.IndexOf(elm1)].Add(nodes.IndexOf(elm2)); //adjacentlist[elm1] ditambahin index elm2 di list nodesnya
+				//misal ada edge A B, maka dan nodes isinya {A, B} maka adjacentlist[0].Add(1)
+				// 0 didapet dari indeksnya nodes yang isinya "A" dan 1 dari indeksnya node yang isinya "B"
 				adjacentList[nodes.IndexOf(elm2)].Add(nodes.IndexOf(elm1)); //masing masing dimasukkin ke list adjacency tetangganya
 			}
 			
+		}
+		for (int i =0; i < nodes.Capacity; i++){
+			adjacentList[i].Sort((x,y) => nodes[x].CompareTo(nodes[y]));
+			//sort boy
 		}
 		for (int i = 0; i < nodes.Capacity; i++){
 			Console.WriteLine("Adjacent node dari node {0} adalah", nodes[i]);
@@ -137,9 +145,12 @@ public class main
 				Console.Write(" {0}",nodes[b]);
 			}
 			Console.WriteLine("");
+			//ini buat ngecek aja bener apa gak.
 		}
+
 		
-		FriendRecommendation(adjacentList,nodes,"A");
+		
+		FriendRecommendation(adjacentList,nodes,"E");
 
 		
 	}
