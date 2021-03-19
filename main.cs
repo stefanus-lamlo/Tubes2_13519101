@@ -118,6 +118,7 @@ public class main
 		List<int>[] adjacentList = new List<int>[nodes.Capacity]; //sebenernya array of list string bagus soalnya c# punya banyak method buat nanganin pencarian string tapi lebih nyaman pake int
 		//kalau pake int ya konsekuensinya harus make referensi indexof dari nodes
 		//misal pengen akses adjacentlist dari node "A", nah cara aksesnya yaitu adjacentlist[nodes.IndexOf("A")]
+		//nanti isinya indeks dari nodes mana aja yang bertetanggaan sama A
 
 		for(int i = 0; i < nodes.Capacity; i++){
 			adjacentList[i] = new List<int>();
