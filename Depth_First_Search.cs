@@ -19,7 +19,7 @@ namespace Depth_First_Search
             {
                 if (!output.Contains(temp[i]))
                 {
-                    DepthFirstSearchHelp(adjacentList, adjacentList[i], ref output);
+                    DepthFirstSearchHelp(adjacentList, temp[i], ref output);
                 }
             }
 
@@ -33,25 +33,27 @@ namespace Depth_First_Search
             int head = nodes.IndexOf(user);
             List<int> output = new List<int>();
 
+            List<string> outputasli = new List<string>();
             if (head == -1)
             {
                 Console.Out.WriteLine("Failed to locate user");
-                return output;
+                return outputasli;
             }
-            DepthFirstSearchHelp(graph, head, ref output);
+            DepthFirstSearchHelp(adjacentList, head, ref output);
 
-            List<string> out = new List<string>();
-            foreach(int o: output){
-                out.Add(nodes[o]);
+            
+
+            foreach(int o in output){
+                outputasli.Add(nodes[o]);
             }
 
 
-            return out;
+            return outputasli;
         }
 
         // Function to return path of the starting node (user) to "end"
         // Starting node based on output's head (head[0])
-        static List<char> getPathDFS(List<int>[] adjacentList, List<string> output, string end)
+        static List<string> getPathDFS(List<int>[] adjacentList, List<string> output, string end, List<string> nodes)
         {
             int endIdx = output.IndexOf(end);
 
@@ -62,16 +64,6 @@ namespace Depth_First_Search
                 return path;
             }
             // int endIdx = output.FindIndex(i => output[i] == end);
-
-            1 3 5 4
-
-            1 4 
-            3 5
-            1 3 
-
-            1 4
-
-
             path.Add(output[endIdx]);
             string curr = end;
             for (int j = endIdx - 1; j >= 0; j--)
