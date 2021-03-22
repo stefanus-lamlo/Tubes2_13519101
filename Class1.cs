@@ -17,10 +17,10 @@ namespace Algorithm
 			temp = adjacentList[nodes.IndexOf(start)];
 			Boolean found = false;
 			output.Add(nodes.IndexOf(start));
-			int[] predator = new int[nodes.Count];
+			int[] predecessor = new int[nodes.Count];
 			for (int i = 0; i < nodes.Count; i++)
 			{
-				predator[i] = -1;
+				predecessor[i] = -1;
 			}
 			bool[] visited = new bool[nodes.Count];
 			for (int i = 0; i < nodes.Count; i++)
@@ -42,7 +42,7 @@ namespace Algorithm
 							found = true;
 						}
 						visited[val] = true;
-						predator[val] = i;
+						predecessor[val] = i;
 						output.Add(val);
 					}
 				}
@@ -59,10 +59,10 @@ namespace Algorithm
 			{
 				int i = nodes.IndexOf(end);
 				hasil.Add(end);
-				while (predator[i] != nodes.IndexOf(start))
+				while (predecessor[i] != nodes.IndexOf(start))
 				{
-					hasil.Add(nodes[predator[i]]);
-					i = predator[i];
+					hasil.Add(nodes[predecessor[i]]);
+					i = predecessor[i];
 				}
 				hasil.Add(start);
 				hasil.Reverse();
